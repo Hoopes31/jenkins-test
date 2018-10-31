@@ -1,15 +1,13 @@
 pipeline {
   agent any
-
-  tools {nodejs “node”}
-
+  tools {nodejs 'latest'}
   stages {
     stage('Build') {
       steps {
         echo 'Building..'
         echo "${env.BUILD_ID} on ${env.JENKINS_URL}"
-        echo 'Installing node'
-        sh 'npm i'
+        echo 'Checking node config'
+        sh 'npm config ls'
       }
     }
     stage('Test') {
