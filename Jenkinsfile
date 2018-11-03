@@ -10,7 +10,7 @@ pipeline {
   // tools {nodejs "latest"}
 
   stages {
-    stage("Cloning repo") {
+    stage("Clone") {
       steps {
         checkout scm
         sh 'ls'
@@ -20,9 +20,9 @@ pipeline {
       steps {
         echo 'Building..'
         echo "${env.BUILD_ID} on ${env.JENKINS_URL}"
-        // script {
-        //   dockerImage = docker.build registry + ":$BUILD_NUMBER"
-        // }
+        script {
+          dockerImage = docker.build("jenkins-test")
+        }
       }
     }
     // stage('Test') {
