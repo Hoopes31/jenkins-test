@@ -1,5 +1,5 @@
 pipeline {
-  agent any
+  agent { dockerfile true }
 
   environment {
     registry = "hoopes31/testing-jenkins-deploy"
@@ -15,16 +15,16 @@ pipeline {
         checkout scm
       }
     }
-    stage('Build') {
-      steps {
-        echo 'Building..'
-        echo "${env.BUILD_ID} on ${env.JENKINS_URL}"
-        sh 'ls'
-        script {
-          dockerImage = docker.build("jenkins-test")
-        }
-      }
-    }
+    // stage('Build') {
+    //   steps {
+    //     echo 'Building..'
+    //     echo "${env.BUILD_ID} on ${env.JENKINS_URL}"
+    //     sh 'ls'
+    //     script {
+    //       dockerImage = docker.build("jenkins-test")
+    //     }
+    //   }
+    // }
     // stage('Test') {
     //   steps {
     //     echo 'Starting test phase'
