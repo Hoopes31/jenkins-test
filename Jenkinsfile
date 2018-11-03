@@ -1,7 +1,19 @@
 pipeline {
   agent any
+
+  environment {
+    registry = "hoopes31/testing-jenkins-deploy"
+    registryCredential = 'dockerhub'
+    dockerImage = ''
+  }
+
   tools {nodejs 'latest'}
   stages {
+    stage('Cloning repo') {
+      steps {
+        git ‘https://github.com/Hoopes31/jenkins-test'
+      }
+    }
     stage('Build') {
       steps {
         echo 'Building..'
@@ -9,7 +21,7 @@ pipeline {
         echo 'Checking node config'
         sh 'npm config ls'
         script {
-          def app = docker.build("./")
+          dockerImage = docker.build registry + ":$BUILD_NUMBER"
         }
       }
     }
@@ -17,7 +29,7 @@ pipeline {
       steps {
         echo 'Starting test phase'
         script {
-          app.inside{
+          dockerImage.inside{
             sh 'echo "Testing internal things"'
           }
         }
@@ -27,9 +39,9 @@ pipeline {
       steps {
         echo 'Deploying..'
         script {
-          docker.withRegistry('https://hub.docker.com/r/hoopes31/testing-jenkins-deploy/', 'docker-hub-credentials') {
-              app.push("${env.BUILD_NUMBER}")
-              app.push("latest")
+          docker.withRegistry('https://hub.docker.com/r/hoopes31/testing-jenkins-deploy/', registryCredential) {
+              dockerImage.push("${env.BUILD_NUMBER}")
+              dockerImage.push("latest")
           }
         }
       }
