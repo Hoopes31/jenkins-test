@@ -1,23 +1,25 @@
 pipeline {
-  agent { dockerfile true }
+  agent any
 
-  // environment {
-  //   registry = "hoopes31/testing-jenkins-deploy"
-  //   registryCredential = "dockerhub"
-  //   dockerImage = ""
-  // }
+  environment {
+    registry = "hoopes31/testing-jenkins-deploy"
+    registryCredential = "dockerhub"
+    dockerImage = ""
+  }
 
   // tools {nodejs "latest"}
 
   stages {
-    stage('Building') {
+    stage("Clone") {
       steps {
-        // echo 'Building..'
-        // echo "${env.BUILD_ID} on ${env.JENKINS_URL}"
+        checkout scm
+      }
+    }
+    stage('Build') {
+      steps {
         sh 'ls'
-        // script {
-        //   dockerImage = docker.build("jenkins-test")
-        // }
+        echo "${env.BUILD_ID} on ${env.JENKINS_URL}"
+        sh 'docker -v'
       }
     }
     // stage('Test') {
