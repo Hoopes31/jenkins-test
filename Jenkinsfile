@@ -22,7 +22,7 @@ pipeline {
     stage('Deploy') {
       steps {
         echo 'Deploying..'
-        docker.withRegistry('https://registry.hub.docker.com', 'docker-hub-credentials') {
+        docker.withRegistry('https://hub.docker.com/r/hoopes31/testing-jenkins-deploy/', 'docker-hub-credentials') {
             app.push("${env.BUILD_NUMBER}")
             app.push("latest")
         }
