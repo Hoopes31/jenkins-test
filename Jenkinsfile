@@ -15,15 +15,15 @@ pipeline {
         sh 'ls'
       }
     }
-    // stage('Build') {
-    //   steps {
-    //     echo 'Building..'
-    //     echo "${env.BUILD_ID} on ${env.JENKINS_URL}"
-    //     script {
-    //       dockerImage = docker.build registry + ":$BUILD_NUMBER"
-    //     }
-    //   }
-    // }
+    stage('Build') {
+      steps {
+        echo 'Building..'
+        echo "${env.BUILD_ID} on ${env.JENKINS_URL}"
+        script {
+          dockerImage = docker.build registry + ":$BUILD_NUMBER"
+        }
+      }
+    }
     // stage('Test') {
     //   steps {
     //     echo 'Starting test phase'
