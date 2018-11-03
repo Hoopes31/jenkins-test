@@ -11,15 +11,14 @@ pipeline {
   stages {
     stage("Cloning repo") {
       steps {
-        git "https://github.com/Hoopes31/jenkins-test"
+        checkout scm
+        sh 'ls'
       }
     }
     // stage('Build') {
     //   steps {
     //     echo 'Building..'
     //     echo "${env.BUILD_ID} on ${env.JENKINS_URL}"
-    //     echo 'Checking node config'
-    //     sh 'npm config ls'
     //     script {
     //       dockerImage = docker.build registry + ":$BUILD_NUMBER"
     //     }
