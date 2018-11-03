@@ -13,13 +13,13 @@ pipeline {
     stage("Clone") {
       steps {
         checkout scm
-        sh 'ls'
       }
     }
     stage('Build') {
       steps {
         echo 'Building..'
         echo "${env.BUILD_ID} on ${env.JENKINS_URL}"
+        sh 'ls'
         script {
           dockerImage = docker.build("jenkins-test")
         }
