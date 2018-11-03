@@ -10,12 +10,7 @@ pipeline {
   // tools {nodejs "latest"}
 
   stages {
-    // stage("Clone") {
-    //   steps {
-    //     checkout scm
-    //   }
-    // }
-    stage('Build') {
+    stage('Building') {
       steps {
         // echo 'Building..'
         // echo "${env.BUILD_ID} on ${env.JENKINS_URL}"
