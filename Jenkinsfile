@@ -11,7 +11,7 @@ pipeline {
   stages {
     stage('Cloning repo') {
       steps {
-        git ‘https://github.com/Hoopes31/jenkins-test'
+        git "https://github.com/Hoopes31/jenkins-test"
       }
     }
     stage('Build') {
