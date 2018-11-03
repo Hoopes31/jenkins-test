@@ -25,7 +25,7 @@ pipeline {
         // }
       }
     }
-    stage('Test') {
+    // stage('Test') {
     //   steps {
     //     echo 'Starting test phase'
     //     script {
@@ -34,7 +34,7 @@ pipeline {
     //       }
     //     }
     //   }
-    }
+    // }
     // stage('Deploy') {
     //   steps {
     //     echo 'Deploying..'
