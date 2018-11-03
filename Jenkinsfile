@@ -38,7 +38,7 @@ pipeline {
       steps {
         echo 'Deploying..'
         script {
-          docker.withRegistry(registry, registryCredential) {
+          docker.withRegistry("", registryCredential) {
               dockerImage.push("${env.BUILD_NUMBER}")
               dockerImage.push("latest")
           }
