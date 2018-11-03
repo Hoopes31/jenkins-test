@@ -38,7 +38,7 @@ pipeline {
       steps {
         echo 'Deploying..'
         script {
-          docker.withRegistry('https://hub.docker.com/r/hoopes31/testing-jenkins-deploy/', registryCredential) {
+          docker.withRegistry(registry, registryCredential) {
               dockerImage.push("${env.BUILD_NUMBER}")
               dockerImage.push("latest")
           }
