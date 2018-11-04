@@ -5,6 +5,8 @@ pipeline {
     registry = "hoopes31/testing-jenkins-deploy"
     registryCredential = "dockerhub"
     dockerImage = ""
+    project = "prj-sand-264f4330"
+    containerName = "test-deploy"
   }
 
   // tools {nodejs "latest"}
@@ -38,10 +40,7 @@ pipeline {
       steps {
         echo 'Deploying..'
         script {
-          docker.withRegistry("", registryCredential) {
-              dockerImage.push("${env.BUILD_NUMBER}")
-              dockerImage.push("latest")
-          }
+          sh "docker push gcr.io/${project}/${containerName}:${env.BUILD_NUMBER}"
         }
       }
     }
