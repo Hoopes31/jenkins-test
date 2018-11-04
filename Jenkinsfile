@@ -2,8 +2,6 @@ pipeline {
   agent any
 
   environment {
-    registry = "hoopes31/testing-jenkins-deploy"
-    registryCredential = "dockerhub"
     dockerImage = ""
     project = "prj-sand-264f4330"
     containerName = "test-deploy"
